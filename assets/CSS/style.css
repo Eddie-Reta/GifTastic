@@ -1,0 +1,17 @@
+/*CSS stylesheet*/
+body{
+    background-color: lightgray;
+}
+.car {
+    color: white;
+    background: lightskyblue;
+    border-radius: 25px;
+    padding: 15px;
+
+}
+#automobile {
+    float: right;
+    position: absolute;
+    top: 200px;
+    right: 0;
+}
