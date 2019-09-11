@@ -1,12 +1,13 @@
+$(document).ready( function(){
 // //Javascript
-var exampleCars = ["mustang", "evo lancer", "rx7", "gtr", "supra", "nissan silvia", "370z", "miata", "mitsubishi 3000gt"]
+var exampleCars = ["mustang", "evo lancer", "rx7", "gtr", "supra", "nissan silvia", "370z", "miata", "gti", "bmw E30"]
 
 function carGifs(){
     // console.log("it works");
    var carSearch = $(this).attr("data-car");
-   console.log(carSearch);
+   //console.log(carSearch);
      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + carSearch + "&api_key=gBpiXvp8GYVz38NiBBNHJjLI7D3P2pCF&limit=10&rating=PG-13&lang=en";
-     console.log(queryURL)
+     //console.log(queryURL)
      $.ajax({
          url: queryURL,
          method: "GET"
@@ -66,7 +67,7 @@ function carGifs(){
     $(document).on("click", ".car", carGifs);
 renderButtons();
 
-
+});
 
 
 
