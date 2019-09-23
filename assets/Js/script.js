@@ -1,43 +1,47 @@
-$(document).ready( function(){
-// //Javascript
-var exampleCars = ["mustang", "evo lancer", "rx7", "gtr", "supra", "nissan silvia", "370z", "miata", "gti", "bmw E30"]
-
-function carGifs(){
-    // console.log("it works");
-   var carSearch = $(this).attr("data-car");
-   //console.log(carSearch);
-     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + carSearch + "&api_key=gBpiXvp8GYVz38NiBBNHJjLI7D3P2pCF&limit=10&rating=PG-13&lang=en";
-     //console.log(queryURL)
-     $.ajax({
-         url: queryURL,
-         method: "GET"
-     })
-     .then(function(response){
-     
-         console.log(response.data);
-
-                 var results = response.data;
-
-                 for (var i = 0; i < results.length; i++){
-
-             var gifDiv = $("<div>");
-
-             var carImage = $("<img>");
-            // var rating = results[i].rating;
-             var p = $("<p>").text("Rating:" + response.data[0].rating);
-
-             carImage.attr("src", results[i].images.fixed_height.url);
-             //gifDiv.append(p);
-             gifDiv.append(carImage);
-
-             gifDiv.append(p);
-
-             $("#gifs").prepend(gifDiv);
-     }
-    });
-}
-    function renderButtons(){
+$(document).ready(function () {
+    // //Javascript
+    var exampleCars = ["mustang", "evo lancer", "rx7", "gtr", "supra", "nissan silvia", "370z", "miata", "gti", "bmw E30"]
+// use api to grab GIFS corresponding to a car search
+    function carGifs() {
+        $("#gifs").empty();
         
+        var carSearch = $(this).attr("data-car");
+        
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + carSearch + "&api_key=gBpiXvp8GYVz38NiBBNHJjLI7D3P2pCF&limit=10&rating=PG-13&lang=en";
+       //ajax call to the api grabing results and adding the exampleCars
+        $.ajax({
+                url: queryURL,
+                method: "GET"
+            })
+            .then(function (response) {
+
+                console.log(response.data);
+
+                var results = response.data;
+                //loop the each result to add tags 
+                for (var i = 0; i < results.length; i++) {
+
+                    var gifDiv = $("<div>");
+
+                    var carImage = $("<img>");
+                    // var rating = results[i].rating;
+                    var p = $("<p>").text("Rating:" + response.data[0].rating);
+
+                    carImage.attr("src", results[i].images.fixed_height.url);
+                    //gifDiv.append(p);
+                    gifDiv.append(carImage);
+
+                    gifDiv.append(p);
+
+                    $("#gifs").prepend(gifDiv);
+
+                };
+            });
+    };
+
+    //renders buttons to the screen
+    function renderButtons() {
+
         $("#buttons").empty();
 
         for (var e = 0; e < exampleCars.length; e++) {
@@ -51,36 +55,33 @@ function carGifs(){
             makeButtons.text(exampleCars[e]);
 
             $("#buttons").append(makeButtons);
-        }
-    }
-    $("#add-car").on("click", function(event){
+        };
+    };
+
+    $(document).on("click", ".car", carGifs);
+
+    renderButtons();
+//adds button on click and validates each input to see if it already exist if it doesnt it adds it 
+    $("#add-car").on("click", function (event) {
 
         event.preventDefault();
 
-        var cars = $("#car-input").val().trim();
+        var input = $("#car-input").val().trim();
+        
+        var existingCar = "";
 
-        exampleCars.push(cars);
+        for (var i = 0; i < exampleCars.length; i++) {
+            if(exampleCars[i] === input) {
+                existingCar = exampleCars[i];
+            };
+        };
 
-        renderButtons();
-
+        if (input === "" || input === existingCar) {
+            alert("Please Fill in Text!! or Input already exist!!");
+        } else if (input) {
+            exampleCars.push(input);
+            renderButtons();
+        };
     });
-    $(document).on("click", ".car", carGifs);
-renderButtons();
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// enjoy the GIFS!!! 😁
