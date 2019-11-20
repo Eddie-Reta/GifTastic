@@ -33,6 +33,14 @@ body{
     flex-direction: column ; 
     justify-items: center;
 }
+#ex {
+    color: blue;
+    margin: 0;
+    font-size: 3vh;
+}
+.rating {
+    color: blue;
+}
 #add-car {
     color: blue;
     background-color: gray;
@@ -40,19 +48,13 @@ body{
     animation: alternate;
     height: 5vh;
     width: 10vw;
-   
-   
-    
 }
 #add-car:hover {
     transform: scale(1.5, 1.5);
 }
 #buttons {
-    padding: 1%;
-   
-  
+    padding: 1%;  
 }
-
 #text {
     color: blue;
     text-align: center;
@@ -85,5 +87,6 @@ body{
 .gifAdded {
     height: 15vh;
     width: 16vw;
-  
+    cursor: pointer;
+
 }
